@@ -11,7 +11,6 @@
 #include <math.h>
 #define N 1024
 
-
 int main(int argc, char const *argv[])
 {
 	int G_x[9] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};

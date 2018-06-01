@@ -10,7 +10,7 @@ void *thread_function(void *arg);
 char message[] = "Hello World";
 int main(int argc, char const *argv[])
 {
-	int res;
+	int res,i;
 	pthread_t a_thread;
 	void *thread_result;
 
@@ -27,6 +27,7 @@ int main(int argc, char const *argv[])
 		perror("Thread join failed");
 		exit(EXIT_FAILURE);
 	}
+
 	printf("Thread joined, it returned %s\n", (char *)thread_result);
 	printf("Message is now%s\n", message);
 	exit(EXIT_SUCCESS);
