@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
 	int G_x[9] = {-1, -2, -1, 0, 0, 0, 1, 2, 1};
 	int G_y[9] = {-1, 0, 1, -2, 0, 2, -1, 0, 1};
 	int j, k, hight = 0, weidht = 0;
-	int f1, f2, f;
+	int f1, f2;
 	int i;
 	int img[N][N];
 	int a[9];
@@ -34,20 +34,20 @@ int main(int argc, char const *argv[])
 	in = fopen(file_in, "rb");
 	out = fopen(file_out, "wb");
 
-	if(in!=NULL){
-		for(j = 0; j < 3; j++) {
+	if (in != NULL) {
+		for (j = 0; j < 3; j++) {
 			k = fgetc(in);
-			fputc(k,out);
+			fputc(k, out);
 		}
 		fscanf(in, "%d", &weidht);
 		fprintf(out, "%d", weidht);
 		k = fgetc(in);
-		fputc(k,out);
+		fputc(k, out);
 		fscanf(in, "%d", &hight);
 		fprintf(out, "%d", hight);
-		for(j = 0; j < 4; j++) {
+		for (j = 0; j < 4; j++) {
 			k = fgetc(in);
-			fputc(k,out);
+			fputc(k, out);
 		}
 
 		for (j = 0; j < hight; j++)
@@ -55,14 +55,12 @@ int main(int argc, char const *argv[])
 				img[j][k] = fgetc(in);
 	}
 
-	for ( j = 0; j < weidht; j++)
-		fputc(img[0][j],out);
+	for (j = 0; j < weidht; j++)
+		fputc(img[0][j], out);
 
-	for (j = 1; j < hight-1; j++)
-	{
-		fputc(img[j][0],out);
-		for (k = 1; k < weidht-1; k++)
-		{
+	for (j = 1; j < hight-1; j++) {
+		fputc(img[j][0], out);
+		for (k = 1; k < weidht-1; k++) {
 			a[0] = img[j-1][k-1];
 			a[1] = img[j-1][k];
 			a[2] = img[j-1][k+1];
@@ -75,30 +73,29 @@ int main(int argc, char const *argv[])
 			a[7] = img[j+1][k];
 			a[8] = img[j+1][k+1];
 
-			for(i = 0; i<9; i++)
+			for (i = 0; i < 9; i++)
 				z[i] = G_y[i] * a[i];
 
-			for(f1 =0, i = 0; i<9; i++)
-				f1 = f1 +z[i];
+			for (f1 = 0, i = 0; i < 9; i++)
+				f1 = f1 + z[i];
 
-			for(i = 0; i<9; i++)
+			for (i = 0; i < 9; i++)
 				z[i] = G_x[i] * a[i];
 
-			for(f2 =0, i = 0; i<9; i++)
-				f2 = f2 +z[i];
+			for (f2 = 0, i = 0; i < 9; i++)
+				f2 = f2 + z[i];
 			f1 = abs(f1);
 			f2 = abs(f2);
 			f1 = f1*f1;
 			f2 = f2*f2;
-			f = f1 + f2;
-			f = sqrt(f);
-			fputc(f,out);
+			f1 = sqrt(f1 + f2);
+			fputc(f1, out);
 		}
-		fputc(img[j][weidht-1],out);
+		fputc(img[j][weidht-1], out);
 	}
 
-	for ( j = 0; j < weidht; j++)
-		fputc(img[hight - 1][j],out);
+	for (j = 0; j < weidht; j++)
+		fputc(img[hight - 1][j], out);
 
 	fclose(out);
 	fclose(in);
